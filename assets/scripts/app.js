@@ -7,7 +7,18 @@ const equalEl = document.querySelector(".equal");
 const clearAllEl = document.querySelector(".all-clear");
 const clearLastEl = document.querySelector(".last-entity-clear");
 const log10 = document.getElementById("log10");
-// console.log(lo);
+const ln=document.getElementById('ln');
+const t_rest=document.getElementById('10rest')
+
+
+t_rest.addEventListener('click',(e)=>{
+    // console.log(result);
+    // if(dis2Num)return;
+    lastOperation='10^'
+    const operationName='10^'
+    mathOperation()
+    clearVar(operationName)
+})
 
 log10.addEventListener("click", (e) => {
   lastOperation = e.target.innerText;
@@ -15,6 +26,15 @@ log10.addEventListener("click", (e) => {
   mathOperation();
   clearVar(operationName);
 });
+
+ln.addEventListener('click',(e)=>{
+    lastOperation=e.target.innerText;
+    console.log(lastOperation);
+    const operationName=e.target.innerText;
+    mathOperation()
+    clearVar(operationName);
+})
+
 let dis1Num = "";
 let dis2Num = "";
 let result = null;
@@ -51,6 +71,7 @@ operationEl.forEach((operation) => {
   });
 });
 const clearVar = (name = "") => {
+    // console.log(name);
   dis1Num += dis2Num + " " + name + " ";
   display1El.innerText = dis1Num;
   display2El.innerText = "";
@@ -72,10 +93,17 @@ const mathOperation = () => {
   } else if (lastOperation === "log") {
     if (!dis2Num) return;
     result = Math.log10(dis2Num);
+  } else if (lastOperation === "ln") {
+    console.log(dis2Num);
+    if (!dis2Num) return;
+    result = Math.log(dis2Num);
+  } else if (lastOperation === "10^") {
+    result=Math.pow(10, parseFloat(dis2Num))
   }
 };
 
 equalEl.addEventListener("click", () => {
+    
     if (!dis2Num || !dis1Num) return;
   haveDot = false;
   mathOperation();
@@ -84,6 +112,7 @@ equalEl.addEventListener("click", () => {
   tempResultEl.innerText = "";
   dis2Num = result;
   dis1Num = "";
+  console.log('after'+result);
 });
 
 clearAllEl.addEventListener("click", () => {
@@ -96,8 +125,10 @@ clearAllEl.addEventListener("click", () => {
 });
 
 clearLastEl.addEventListener("click", () => {
+   
   display2El.innerText = "";
   dis2Num = "";
+  console.log(result);
 });
 
 window.addEventListener("keydown", (e) => {
