@@ -76,7 +76,7 @@ const mathOperation = () => {
 };
 
 equalEl.addEventListener("click", () => {
-  //   if (!dis2Num || !dis1Num) return;
+    if (!dis2Num || !dis1Num) return;
   haveDot = false;
   mathOperation();
   clearVar();
