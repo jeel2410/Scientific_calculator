@@ -6,14 +6,14 @@ const operationEl = document.querySelectorAll(".operation");
 const equalEl = document.querySelector(".equal");
 const clearAllEl = document.querySelector(".all-clear");
 const clearLastEl = document.querySelector(".last-entity-clear");
-const lo = document.getElementById("lo");
+const log10 = document.getElementById("log10");
 // console.log(lo);
 
-lo.addEventListener("click", (e) => {
+log10.addEventListener("click", (e) => {
   lastOperation = e.target.innerText;
-  dis1Num = e.target.innerText;
-  display1El.innerText = dis1Num + "";
+  const operationName = e.target.innerText;
   mathOperation();
+  clearVar(operationName);
 });
 let dis1Num = "";
 let dis2Num = "";
