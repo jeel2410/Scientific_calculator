@@ -14,10 +14,31 @@ const sqrt = document.getElementById("sqrt");
 const two_rest = document.getElementById("two_rest");
 const fact=document.getElementById('fact');
 const one_divide=document.getElementById('one_divide');
+const trigonometry=document.getElementById('trigonometry');
+const block= trigonometry.getElementsByClassName('block')
 
+let blockevent=false
 let b_ten = false;
 let log = false;
 let lne = false;
+
+trigonometry.addEventListener('click',(e)=>{
+  // console.log(block[0].classList.toggle('block'));
+  
+  
+  // console.log(block);
+  // if(blockevent){
+    trigonometry.getElementsByClassName('block')[0].style.display='block';
+  // }
+  // else{
+  //   trigonometry.getElementsByClassName('block')[0].style.display='none'
+    
+  // }
+  
+  blockevent=!blockevent;
+  // trigonometry.getElementsByClassName('block').style.display='block'
+  // block.style.display='block';
+})
 
 
 one_divide.addEventListener('click',(e)=>{
