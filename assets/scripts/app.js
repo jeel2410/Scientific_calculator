@@ -7,34 +7,34 @@ const equalEl = document.querySelector(".equal");
 const clearAllEl = document.querySelector(".all-clear");
 const clearLastEl = document.querySelector(".last-entity-clear");
 const log10 = document.getElementById("log10");
-const ln = document.getElementById('ln');
-const base10 = document.getElementById('base10')
-const power=document.getElementById('power')
-const sqrt=document.getElementById('sqrt')
+const ln = document.getElementById("ln");
+const base10 = document.getElementById("base10");
+const power = document.getElementById("power");
+const sqrt = document.getElementById("sqrt");
 let b_ten = false;
-let log = false
+let log = false;
 let lne = false;
 
-sqrt.addEventListener('click',(e)=>{
+sqrt.addEventListener("click", (e) => {
+  if (!dis2Num) return;
   lastOperation = e.target.innerText;
-    const operationName = e.target.innerText;
-    mathOperation();
-    clearVar(operationName);
-})
+  mathOperation();
+  tempResultEl.innerText = "";
+  display2El.innerText = result;
+  display1El.innerText = lastOperation + dis2Num;
+});
 
-
-base10.addEventListener('click', (e) => {
+base10.addEventListener("click", (e) => {
   if (!b_ten) {
     b_ten = true;
     console.log(e.target.innerText);
     lastOperation = e.target.innerText;
     const operationName = e.target.innerText;
-    mathOperation()
-    result = '10^'
-    clearVar(operationName)
+    mathOperation();
+    result = "10^";
+    clearVar(operationName);
   }
-
-})
+});
 
 log10.addEventListener("click", (e) => {
   if (!log) {
@@ -44,21 +44,18 @@ log10.addEventListener("click", (e) => {
     mathOperation();
     clearVar(operationName);
   }
-
 });
 
-ln.addEventListener('click', (e) => {
+ln.addEventListener("click", (e) => {
   if (!lne) {
     lne = true;
     lastOperation = e.target.innerText;
     console.log(lastOperation);
     const operationName = e.target.innerText;
-    mathOperation()
+    mathOperation();
     clearVar(operationName);
-
   }
-
-})
+});
 
 let dis1Num = "";
 let dis2Num = "";
@@ -98,6 +95,13 @@ operationEl.forEach((operation) => {
   });
 });
 const clearVar = (name = "") => {
+  // console.log("disp1"+display1El);
+  // console.log("disp2"+display2El);
+  // console.log("dis1"+dis1Num);
+  // console.log("dis2"+dis2Num);
+  // console.log("result"+result);
+  // console.log("tempres"+tempResultEl);
+  // console.log("name"+name);
   // console.log(name);
   dis1Num += dis2Num + " " + name + " ";
   display1El.innerText = dis1Num;
@@ -126,18 +130,15 @@ const mathOperation = () => {
     result = Math.log(dis2Num);
   } else if (lastOperation === "10x") {
     if (!dis2Num) return;
-    result = Math.pow(10, parseFloat(dis2Num))
-  } else if(lastOperation==='xy'){
-    result=Math.pow(parseFloat(result),parseFloat(dis2Num))
-  } else if(lastOperation==='sqrt'){
-    result=Math.sqrt((dis2Num))
-    console.log(result);
-
+    result = Math.pow(10, parseFloat(dis2Num));
+  } else if (lastOperation === "xy") {
+    result = Math.pow(parseFloat(result), parseFloat(dis2Num));
+  } else if (lastOperation === "sqrt") {
+    result = Math.sqrt(dis2Num);
   }
 };
 
 equalEl.addEventListener("click", () => {
-
   if (!dis2Num || !dis1Num) return;
   haveDot = false;
   mathOperation();
@@ -146,7 +147,7 @@ equalEl.addEventListener("click", () => {
   tempResultEl.innerText = "";
   dis2Num = result;
   dis1Num = "";
-  console.log('after' + result);
+  console.log("after" + result);
 });
 
 clearAllEl.addEventListener("click", () => {
@@ -162,7 +163,6 @@ clearAllEl.addEventListener("click", () => {
 });
 
 clearLastEl.addEventListener("click", () => {
-
   display2El.innerText = "";
   dis2Num = "";
   console.log(result);
