@@ -12,57 +12,77 @@ const base10 = document.getElementById("base10");
 const power = document.getElementById("power");
 const sqrt = document.getElementById("sqrt");
 const two_rest = document.getElementById("two_rest");
-const fact=document.getElementById('fact');
-const one_divide=document.getElementById('one_divide');
-const trigonometry=document.getElementById('trigonometry');
-const block= trigonometry.getElementsByClassName('block')
+const fact = document.getElementById("fact");
+const one_divide = document.getElementById("one_divide");
+const trigonometry = document.getElementById("trigonometry");
+const block = trigonometry.getElementsByClassName("block");
+const trichange = document.getElementById("trichange");
+const sin = document.getElementById("sin");
+const cos = document.getElementById("cos");
+const tan = document.getElementById("tan");
+const csc = document.getElementById("csc");
+const sec = document.getElementById("sec");
+const cot = document.getElementById("cot");
 
-let blockevent=false
+let blockevent = false;
 let b_ten = false;
 let log = false;
 let lne = false;
+let trichange_event = false;
+let trigonometry_event=false;
 
-trigonometry.addEventListener('click',(e)=>{
-  // console.log(block[0].classList.toggle('block'));
-  
-  
-  // console.log(block);
-  // if(blockevent){
-    trigonometry.getElementsByClassName('block')[0].style.display='block';
-  // }
-  // else{
-  //   trigonometry.getElementsByClassName('block')[0].style.display='none'
-    
-  // }
-  
-  blockevent=!blockevent;
-  // trigonometry.getElementsByClassName('block').style.display='block'
-  // block.style.display='block';
-})
+trichange.addEventListener("click", () => {
+  if (!trichange_event) {
+    sin.innerHTML = "<p>sin <sup>-1</sup></p>";
+    cos.innerHTML = "<p>cos <sup>-1</sup></p>";
+    tan.innerHTML = "<p>tan <sup>-1</sup></p>";
+    csc.innerHTML = "<p>csc <sup>-1</sup></p>";
+    sec.innerHTML = "<p>sec <sup>-1</sup></p>";
+    cot.innerHTML = "<p>cot <sup>-1</sup></p>";
+  } else {
+    sin.innerHTML = "<p>sin</p>";
+    cos.innerHTML = "<p>cos</p>";
+    tan.innerHTML = "<p>tan</p>";
+    csc.innerHTML = "<p>csc</p>";
+    sec.innerHTML = "<p>sec</p>";
+    cot.innerHTML = "<p>cot</p>";
+  }
+  trichange_event=!trichange_event
+});
 
-
-one_divide.addEventListener('click',(e)=>{
-  // console.log(e.target.innerText);
-  if(!dis2Num)return;
+sin.addEventListener('click',(e)=>{
   lastOperation=e.target.innerText;
+  console.log(lastOperation);
   mathOperation();
-  tempResultEl.innerText="";
-  display2El.innerText=result;
-  // console.log(display2El.innerText);
-  display1El.innerText="1 / " + dis2Num;
+  clearVar(lastOperation)
 })
+trigonometry.addEventListener("click", (e) => {
+  
+    trigonometry.getElementsByClassName("block")[0].style.display = "block";
 
+});
 
-fact.addEventListener('click',(e)=>{
+one_divide.addEventListener("click", (e) => {
   // console.log(e.target.innerText);
-  if(!dis2Num)return;
-  lastOperation=e.target.innerText;
+  if (!dis2Num) return;
+  lastOperation = e.target.innerText;
   mathOperation();
-  tempResultEl.innerText="";
-  display2El.innerText=result;
+  tempResultEl.innerText = "";
+  display2El.innerText = result;
   // console.log(display2El.innerText);
-  display1El.innerText=dis2Num+ " !"
-})
+  display1El.innerText = "1 / " + dis2Num;
+});
+
+fact.addEventListener("click", (e) => {
+  // console.log(e.target.innerText);
+  if (!dis2Num) return;
+  lastOperation = e.target.innerText;
+  mathOperation();
+  tempResultEl.innerText = "";
+  display2El.innerText = result;
+  // console.log(display2El.innerText);
+  display1El.innerText = dis2Num + " !";
+});
 
 two_rest.addEventListener("click", (e) => {
   console.log(e.target.innerText);
@@ -196,18 +216,41 @@ const mathOperation = () => {
     result = Math.sqrt(dis2Num);
   } else if (lastOperation === "x2") {
     result = Math.pow(parseFloat(dis2Num), 2);
-  }  else if (lastOperation === "n!") {
+  } else if (lastOperation === "n!") {
     result = factorial(parseFloat(dis2Num));
   } else if (lastOperation === "1/x") {
-    result = 1/parseFloat(dis2Num);
-  }
+    result = 1 / parseFloat(dis2Num);
+  } else if (lastOperation === "sin") {
+    console.log(dis2Num);
+    if (!dis2Num) return;
+    result = Math.sin(dis2Num);
+  } else if (lastOperation === "cos") {
+    console.log(dis2Num);
+    if (!dis2Num) return;
+    result = Math.cos(dis2Num);
+  } else if (lastOperation === "tan") {
+    console.log(dis2Num);
+    if (!dis2Num) return;
+    result = Math.tan(dis2Num);
+  } else if (lastOperation === "csc") {
+    console.log(dis2Num);
+    if (!dis2Num) return;
+    result = Math.sin(1/dis2Num);
+  } else if (lastOperation === "sec") {
+    console.log(dis2Num);
+    if (!dis2Num) return;
+    result = Math.cos(1/dis2Num);
+  } else if (lastOperation === "cot") {
+    console.log(dis2Num);
+    if (!dis2Num) return;
+    result = Math.tan(dis2Num);
+  } 
 };
 
-const factorial=(num)=>{
-  if(num==1)return num;
-  return num=num*factorial(num-1);
-  
-}
+const factorial = (num) => {
+  if (num == 1) return num;
+  return (num = num * factorial(num - 1));
+};
 
 equalEl.addEventListener("click", () => {
   if (!dis2Num || !dis1Num) return;
