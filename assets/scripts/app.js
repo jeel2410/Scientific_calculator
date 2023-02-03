@@ -11,9 +11,47 @@ const ln = document.getElementById("ln");
 const base10 = document.getElementById("base10");
 const power = document.getElementById("power");
 const sqrt = document.getElementById("sqrt");
+const two_rest = document.getElementById("two_rest");
+const fact=document.getElementById('fact');
+const one_divide=document.getElementById('one_divide');
+
 let b_ten = false;
 let log = false;
 let lne = false;
+
+
+one_divide.addEventListener('click',(e)=>{
+  // console.log(e.target.innerText);
+  if(!dis2Num)return;
+  lastOperation=e.target.innerText;
+  mathOperation();
+  tempResultEl.innerText="";
+  display2El.innerText=result;
+  // console.log(display2El.innerText);
+  display1El.innerText="1 / " + dis2Num;
+})
+
+
+fact.addEventListener('click',(e)=>{
+  // console.log(e.target.innerText);
+  if(!dis2Num)return;
+  lastOperation=e.target.innerText;
+  mathOperation();
+  tempResultEl.innerText="";
+  display2El.innerText=result;
+  // console.log(display2El.innerText);
+  display1El.innerText=dis2Num+ " !"
+})
+
+two_rest.addEventListener("click", (e) => {
+  console.log(e.target.innerText);
+  if (!dis2Num) return;
+  lastOperation = e.target.innerText;
+  mathOperation();
+  tempResultEl.innerText = "";
+  display2El.innerText = result;
+  display1El.innerText = dis2Num + lastOperation;
+});
 
 sqrt.addEventListener("click", (e) => {
   if (!dis2Num) return;
@@ -135,8 +173,20 @@ const mathOperation = () => {
     result = Math.pow(parseFloat(result), parseFloat(dis2Num));
   } else if (lastOperation === "sqrt") {
     result = Math.sqrt(dis2Num);
+  } else if (lastOperation === "x2") {
+    result = Math.pow(parseFloat(dis2Num), 2);
+  }  else if (lastOperation === "n!") {
+    result = factorial(parseFloat(dis2Num));
+  } else if (lastOperation === "1/x") {
+    result = 1/parseFloat(dis2Num);
   }
 };
+
+const factorial=(num)=>{
+  if(num==1)return num;
+  return num=num*factorial(num-1);
+  
+}
 
 equalEl.addEventListener("click", () => {
   if (!dis2Num || !dis1Num) return;
@@ -219,6 +269,7 @@ const clickEqual = () => {
 const lastentryRemove = () => {
   clearLastEl.click();
 };
+
 const allremove = () => {
   clearAllEl.click();
 };
