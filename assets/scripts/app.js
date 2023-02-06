@@ -17,9 +17,18 @@ const square = document.getElementById("square");
 const fact = document.getElementById("fact");
 const one_divide = document.getElementById("one_divide");
 const trigonometry = document.getElementById("trigonometry");
+const fn=document.getElementById('function')
 const block = trigonometry.getElementsByClassName("block");
+const block2 = trigonometry.getElementsByClassName("block2");
+
 const trichange = document.getElementById("trichange");
 const trihyp= document.getElementById("trihyp");
+const mode=document.getElementById("mode")
+const floor=document.getElementById("floor")
+const ceil=document.getElementById("ceil")
+const rand=document.getElementById("rand")
+const dms=document.getElementById("dms")
+const deg=document.getElementById("deg")
 // console.log(trichange);
 const sin = document.getElementById("sin");
 const cos = document.getElementById("cos");
@@ -29,6 +38,7 @@ const sec = document.getElementById("sec");
 const cot = document.getElementById("cot");
 
 let blockevent = false;
+let block2_event = false;
 let b_ten = false;
 let log = false;
 let lne = false;
@@ -50,6 +60,83 @@ let csc_event=false;
 let sec_event=false;
 let cot_event=false;
 let trihyp_event=false;
+let mode_event=false;
+let floor_event=false;
+let ceil_event=false;
+
+dms.addEventListener('click',(e)=>{
+  lastOperation=e.target.innerText;
+  mathOperation();
+    
+    // display1El.innerText=  '|'+dis2Num+'|'
+    // console.log("res"+result);
+    // console.log(display2El.innerText);
+    display1El.innerText=''
+    display2El.innerText=result;
+    // console.log("after"+ display2El.innerText);
+    dis2Num=result;
+    // clearVar(operationName);
+  
+})
+
+rand.addEventListener('click',(e)=>{
+  display1El.innerText='Random No. (0-1)'
+  display2El.innerText=Math.random();
+})
+
+mode.addEventListener("click", (e) => {
+  if (!mode_event) {
+    mode_event = true;
+    lastOperation = e.target.innerText;
+    // console.log(lastOperation);
+    // const operationName = e.target.innerText;
+    mathOperation();
+    
+    display1El.innerText=  '|'+dis2Num+'|'
+    // console.log("res"+result);
+    // console.log(display2El.innerText);
+    display2El.innerText=result;
+    // console.log("after"+ display2El.innerText);
+    dis2Num=result;
+    // clearVar(operationName);
+  }
+});
+
+floor.addEventListener("click", (e) => {
+  if (!floor_event) {
+    floor_event = true;
+    lastOperation = e.target.innerText;
+    // console.log(lastOperation);
+    // const operationName = e.target.innerText;
+    mathOperation();
+    
+    display1El.innerText = dis2Num
+    // console.log("res"+result);
+    // console.log(display2El.innerText);
+    display2El.innerText=result;
+    // console.log("after"+ display2El.innerText);
+    dis2Num=result;
+    // clearVar(operationName);
+  }
+});
+ceil.addEventListener("click", (e) => {
+  if (!ceil_event) {
+    ceil_event = true;
+    lastOperation = e.target.innerText;
+    // console.log(lastOperation);
+    // const operationName = e.target.innerText;
+    mathOperation();
+    
+    display1El.innerText = dis2Num
+    // console.log("res"+result);
+    // console.log(display2El.innerText);
+    display2El.innerText=result;
+    // console.log("after"+ display2El.innerText);
+    dis2Num=result;
+    // clearVar(operationName);
+  }
+});
+
 
 e.addEventListener('click',(e)=>{
   lastOperation = e.target.innerText;
@@ -269,6 +356,19 @@ trigonometry.addEventListener("click", (e) => {
    
 
 });
+fn.addEventListener("click", (e) => {
+  // console.log(document.getElementsByClassName("block2")[0].style);
+  // console.log( document.getElementsByClassName("block")[0].style);
+  if(block2_event){
+    document.getElementsByClassName("block2")[0].style.display = "none";
+  }else{
+    document.getElementsByClassName("block2")[0].style.display = "block";
+  }
+  block2_event=!block2_event
+   
+
+});
+
 
 
 one_divide.addEventListener("click", (e) => {
@@ -563,7 +663,31 @@ const mathOperation = () => {
     };
     result=Math.E;
    
-  } 
+  } else if (lastOperation === "mode") {
+    result = Math.abs(dis2Num);
+  } else if (lastOperation === "floor") {
+    result = Math.floor(dis2Num);
+    haveDot=false;
+  } else if (lastOperation === "ceil") {
+    result = Math.ceil(dis2Num);
+    haveDot=false;
+  } else if (lastOperation ==='dms'){
+    let d = Math.floor (dis2Num);
+   let minfloat = (dis2Num-d)*60;
+   let m = Math.floor(minfloat);
+   let secfloat = (minfloat-m)*60;
+   let s = Math.round(secfloat);
+   if (s==60) {
+     m++;
+     s=0;
+   }
+   if (m==60) {
+     d++;
+     m=0;
+   }
+   result="" + d + ":" + m + ":" + s;
+  //  return ("" + d + ":" + m + ":" + s);
+  }
 };
 
 const factorial = (num) => {
