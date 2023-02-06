@@ -19,6 +19,7 @@ const one_divide = document.getElementById("one_divide");
 const trigonometry = document.getElementById("trigonometry");
 const block = trigonometry.getElementsByClassName("block");
 const trichange = document.getElementById("trichange");
+const trihyp= document.getElementById("trihyp");
 // console.log(trichange);
 const sin = document.getElementById("sin");
 const cos = document.getElementById("cos");
@@ -42,7 +43,13 @@ let sqrt_event=false;
 let fact_event=false;
 let square_event=false;
 let one_divide_event=false;
-
+let sin_event=false;
+let cos_event=false;
+let tan_event=false;
+let csc_event=false;
+let sec_event=false;
+let cot_event=false;
+let trihyp_event=false;
 
 e.addEventListener('click',(e)=>{
   lastOperation = e.target.innerText;
@@ -84,12 +91,14 @@ pie.addEventListener('click',(e)=>{
 })
 
 trichange.addEventListener("click", (e) => {
+  
   // e.capture()
   // console.log(e.currentTarget);
   // e = window.event || e; 
     
   e.stopPropagation()
   if (!trichange_event) {
+    trichange.style.backgroundColor='#16b2eb7d'
     sin.innerHTML = "<p>sin <sup>-1</sup></p>";
     cos.innerHTML = "<p>cos <sup>-1</sup></p>";
     tan.innerHTML = "<p>tan <sup>-1</sup></p>";
@@ -97,6 +106,7 @@ trichange.addEventListener("click", (e) => {
     sec.innerHTML = "<p>sec <sup>-1</sup></p>";
     cot.innerHTML = "<p>cot <sup>-1</sup></p>";
   } else {
+    trichange.style.backgroundColor='white'
     sin.innerHTML = "<p>sin</p>";
     cos.innerHTML = "<p>cos</p>";
     tan.innerHTML = "<p>tan</p>";
@@ -106,13 +116,148 @@ trichange.addEventListener("click", (e) => {
   }
   trichange_event=!trichange_event
 });
+trihyp.addEventListener("click", (e) => {
+  // e.capture()
+  // console.log(e.currentTarget);
+  // e = window.event || e; 
+    
+  e.stopPropagation()
+  if (!trihyp_event) {
+    trihyp.style.backgroundColor='#16b2eb7d'
+    sin.innerHTML = "<p>sinh</p>";
+    cos.innerHTML = "<p>cosh</p>";
+    tan.innerHTML = "<p>tanh</p>";
+    csc.innerHTML = "<p>csch</p>";
+    sec.innerHTML = "<p>sech</p>";
+    cot.innerHTML = "<p>coth</p>";
+  } else {
+    trihyp.style.backgroundColor='white'
+    sin.innerHTML = "<p>sin</p>";
+    cos.innerHTML = "<p>cos</p>";
+    tan.innerHTML = "<p>tan</p>";
+    csc.innerHTML = "<p>csc</p>";
+    sec.innerHTML = "<p>sec</p>";
+    cot.innerHTML = "<p>cot</p>";
+  }
+  trihyp_event=!trihyp_event
+});
 
 sin.addEventListener('click',(e)=>{
-  lastOperation=e.target.innerText;
-  console.log(lastOperation);
-  mathOperation();
-  clearVar(lastOperation)
+  console.log(e.target.innerText);
+  if (!sin_event) {
+    sin_event = true;
+    lastOperation = e.target.innerText;
+    
+    // console.log(lastOperation);
+    // const operationName = e.target.innerText;
+    mathOperation();
+    
+    display1El.innerText=  e.target.innerText+dis2Num;
+    // console.log("res"+result);
+    // console.log(display2El.innerText);
+    display2El.innerText=result;
+    // console.log("after"+ display2El.innerText);
+    dis2Num=result;
+    // clearVar(operationName);
+  }
 })
+cos.addEventListener('click',(e)=>{
+  console.log(e.target.innerText);
+  if (!cos_event) {
+    cos_event = true;
+    lastOperation = e.target.innerText;
+    
+    // console.log(lastOperation);
+    // const operationName = e.target.innerText;
+    mathOperation();
+    
+    display1El.innerText=  e.target.innerText+dis2Num;
+    // console.log("res"+result);
+    // console.log(display2El.innerText);
+    display2El.innerText=result;
+    // console.log("after"+ display2El.innerText);
+    dis2Num=result;
+    // clearVar(operationName);
+  }
+})
+tan.addEventListener('click',(e)=>{
+  console.log(e.target.innerText);
+  if (!tan_event) {
+    tan_event = true;
+    lastOperation = e.target.innerText;
+    
+    // console.log(lastOperation);
+    // const operationName = e.target.innerText;
+    mathOperation();
+    
+    display1El.innerText=  e.target.innerText+dis2Num;
+    // console.log("res"+result);
+    // console.log(display2El.innerText);
+    display2El.innerText=result;
+    // console.log("after"+ display2El.innerText);
+    dis2Num=result;
+    // clearVar(operationName);
+  }
+})
+
+csc.addEventListener('click',(e)=>{
+  console.log(e.target.innerText);
+  if (!csc_event) {
+    csc_event = true;
+    lastOperation = e.target.innerText;
+    
+    // console.log(lastOperation);
+    // const operationName = e.target.innerText;
+    mathOperation();
+    
+    display1El.innerText=  e.target.innerText+dis2Num;
+    // console.log("res"+result);
+    // console.log(display2El.innerText);
+    display2El.innerText=result;
+    // console.log("after"+ display2El.innerText);
+    dis2Num=result;
+    // clearVar(operationName);
+  }
+})
+sec.addEventListener('click',(e)=>{
+  console.log(e.target.innerText);
+  if (!sec_event) {
+    sec_event = true;
+    lastOperation = e.target.innerText;
+    
+    // console.log(lastOperation);
+    // const operationName = e.target.innerText;
+    mathOperation();
+    
+    display1El.innerText=  e.target.innerText+dis2Num;
+    // console.log("res"+result);
+    // console.log(display2El.innerText);
+    display2El.innerText=result;
+    // console.log("after"+ display2El.innerText);
+    dis2Num=result;
+    // clearVar(operationName);
+  }
+})
+cot.addEventListener('click',(e)=>{
+  console.log(e.target.innerText);
+  if (!cot_event) {
+    cot_event = true;
+    lastOperation = e.target.innerText;
+    
+    // console.log(lastOperation);
+    // const operationName = e.target.innerText;
+    mathOperation();
+    
+    display1El.innerText=  e.target.innerText+dis2Num;
+    // console.log("res"+result);
+    // console.log(display2El.innerText);
+    display2El.innerText=result;
+    // console.log("after"+ display2El.innerText);
+    dis2Num=result;
+    // clearVar(operationName);
+  }
+})
+
 trigonometry.addEventListener("click", (e) => {
   // console.log( document.getElementsByClassName("block")[0].style);
   if(trigonometry_event){
@@ -326,30 +471,82 @@ const mathOperation = () => {
     result = factorial(parseFloat(dis2Num));
   } else if (lastOperation === "1/x") {
     result = 1 / parseFloat(dis2Num);
-  } else if (lastOperation === "sin") {
-    console.log(dis2Num);
+  } else if (lastOperation === "sin" || lastOperation === "sin -1" || lastOperation === "sinh") {
     if (!dis2Num) return;
-    result = Math.sin(dis2Num);
-  } else if (lastOperation === "cos") {
-    console.log(dis2Num);
+
+    if(lastOperation === "sin -1") {
+      result = Math.asin(dis2Num);
+    }else if(lastOperation === "sinh") {
+      result = Math.sinh(dis2Num);
+    }
+    else{
+      result = Math.sin(dis2Num);
+    }
+    // console.log("res"+result);
+    sin_event=false;
+  } else if (lastOperation === "cos" || lastOperation === "cos -1" || lastOperation === "cosh") {
     if (!dis2Num) return;
-    result = Math.cos(dis2Num);
-  } else if (lastOperation === "tan") {
-    console.log(dis2Num);
+
+    if(lastOperation === "cos -1") {
+      result = Math.acos(dis2Num);
+    } else if(lastOperation === "cosh") {
+      result = Math.cosh(dis2Num);
+    }
+    else{
+      result = Math.cos(dis2Num);
+    }
+    // console.log("res"+result);
+    cos_event=false;
+  } else if (lastOperation === "tan" || lastOperation === "tan -1" || lastOperation === "tanh") {
     if (!dis2Num) return;
-    result = Math.tan(dis2Num);
-  } else if (lastOperation === "csc") {
-    console.log(dis2Num);
+    if(lastOperation === "tan -1") {
+      result = Math.atan(dis2Num);
+    } else if(lastOperation === "tanh") {
+      result = Math.tanh(dis2Num);
+    }
+    else{
+      result = Math.tan(dis2Num);
+    }
+    // console.log("res"+result);
+    tan_event=false;
+  } else if (lastOperation === "csc" || lastOperation === "csc -1" || lastOperation === "csch") {
     if (!dis2Num) return;
-    result = Math.sin(1/dis2Num);
-  } else if (lastOperation === "sec") {
-    console.log(dis2Num);
+
+    if(lastOperation === "csc -1") {
+      result =1/ Math.asin(dis2Num);
+    }else if(lastOperation === "csch") {
+      result = 1/Math.sinh(dis2Num);
+    }
+    else{
+      result = 1/Math.sin(dis2Num);
+    }
+    // console.log("res"+result);
+    csc_event=false;
+  } else if (lastOperation === "sec" || lastOperation === "sec -1" || lastOperation === "sech") {
     if (!dis2Num) return;
-    result = Math.cos(1/dis2Num);
-  } else if (lastOperation === "cot") {
-    console.log(dis2Num);
+
+    if(lastOperation === "sec -1") {
+      result = 1/Math.acos(dis2Num);
+    } else if(lastOperation === "cosh") {
+      result = 1/Math.cosh(dis2Num);
+    }
+    else{
+      result = 1/Math.cos(dis2Num);
+    }
+    // console.log("res"+result);
+    sec_event=false;
+  } else if (lastOperation === "cot" || lastOperation === "cot -1" || lastOperation === "coth") {
     if (!dis2Num) return;
-    result = Math.tan(dis2Num);
+    if(lastOperation === "cot -1") {
+      result = 1/Math.atan(dis2Num);
+    } else if(lastOperation === "coth") {
+      result = 1/Math.tanh(dis2Num);
+    }
+    else{
+      result = 1/Math.tan(dis2Num);
+    }
+    // console.log("res"+result);
+    tan_event=false;
   } else if (lastOperation === "pie") {
     console.log("dis2"+dis2Num);
     if(dis2Num){
@@ -399,6 +596,9 @@ clearAllEl.addEventListener("click", () => {
   b_ten = false;
   log = false;
   lne = false;
+  sin_event=false;
+  cos_event=false;
+  tan_event=false;
 });
 
 clearLastEl.addEventListener("click", () => {
