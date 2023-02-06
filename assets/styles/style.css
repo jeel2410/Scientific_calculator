@@ -118,7 +118,7 @@ html {
     /* display: flex;
     flex-direction: column; */
     position: absolute;
-    display: block;
+    display: none;
     top: 420px;
     z-index: 1;
     background-color: #f5f5f5;
