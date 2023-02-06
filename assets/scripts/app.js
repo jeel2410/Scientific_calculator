@@ -20,7 +20,6 @@ const trigonometry = document.getElementById("trigonometry");
 const fn = document.getElementById("function");
 const block = trigonometry.getElementsByClassName("block");
 const block2 = trigonometry.getElementsByClassName("block2");
-
 const trichange = document.getElementById("trichange");
 const trihyp = document.getElementById("trihyp");
 const mode = document.getElementById("mode");
@@ -29,7 +28,7 @@ const ceil = document.getElementById("ceil");
 const rand = document.getElementById("rand");
 const dms = document.getElementById("dms");
 const deg = document.getElementById("deg");
-// console.log(trichange);
+const exp = document.getElementById("exp");
 const sin = document.getElementById("sin");
 const cos = document.getElementById("cos");
 const tan = document.getElementById("tan");
@@ -64,20 +63,19 @@ let mode_event = false;
 let floor_event = false;
 let ceil_event = false;
 
+exp.addEventListener("click", () => {
+  result = Math.exp(dis2Num);
 
-
+  display2El.innerText = result;
+  display1El.innerText = "e^" + dis2Num;
+  dis2Num = result;
+});
 dms.addEventListener("click", (e) => {
   lastOperation = e.target.innerText;
   mathOperation();
-
-  // display1El.innerText=  '|'+dis2Num+'|'
-  // console.log("res"+result);
-  // console.log(display2El.innerText);
   display1El.innerText = "";
   display2El.innerText = result;
-  // console.log("after"+ display2El.innerText);
   dis2Num = result;
-  // clearVar(operationName);
 });
 
 rand.addEventListener("click", (e) => {
@@ -89,98 +87,56 @@ mode.addEventListener("click", (e) => {
   if (!mode_event) {
     mode_event = true;
     lastOperation = e.target.innerText;
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
-
     display1El.innerText = "|" + dis2Num + "|";
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
-    // console.log("after"+ display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
-
 floor.addEventListener("click", (e) => {
   if (!floor_event) {
     floor_event = true;
     lastOperation = e.target.innerText;
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
-
     display1El.innerText = dis2Num;
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
-    // console.log("after"+ display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 ceil.addEventListener("click", (e) => {
   if (!ceil_event) {
     ceil_event = true;
     lastOperation = e.target.innerText;
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
-
     display1El.innerText = dis2Num;
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
-    // console.log("after"+ display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
-
 e.addEventListener("click", (e) => {
   lastOperation = e.target.innerText;
-  // console.log(lastOperation);
-  // const operationName = e.target.innerText;
   mathOperation();
-
-  // display1El.innerText=  "1" + "/" + dis2Num;
-  // console.log("res"+result);
-  // console.log(display2El.innerText);
   if (dis2Num) {
     display1El.innerText = dis2Num + " * e";
   } else {
     display1El.innerText = "e";
   }
   display2El.innerText = result;
-  // console.log("after"+ display2El.innerText);
   dis2Num = result;
 });
-
 pie.addEventListener("click", (e) => {
   lastOperation = e.target.innerText;
-  // console.log(lastOperation);
-  // const operationName = e.target.innerText;
   mathOperation();
-
-  // display1El.innerText=  "1" + "/" + dis2Num;
-  // console.log("res"+result);
-  // console.log(display2El.innerText);
   if (dis2Num) {
     display1El.innerText = dis2Num + " * pie";
   } else {
     display1El.innerText = "pie";
   }
   display2El.innerText = result;
-  // console.log("after"+ display2El.innerText);
   dis2Num = result;
 });
 
 trichange.addEventListener("click", (e) => {
-  // e.capture()
-  // console.log(e.currentTarget);
-  // e = window.event || e;
-
   e.stopPropagation();
   if (!trichange_event) {
     trichange.style.backgroundColor = "#16b2eb7d";
@@ -202,11 +158,6 @@ trichange.addEventListener("click", (e) => {
   trichange_event = !trichange_event;
 });
 trihyp.addEventListener("click", (e) => {
-  // e.capture()
-  // console.log(e.currentTarget);
-  // e = window.event || e;
-
-  e.stopPropagation();
   if (!trihyp_event) {
     trihyp.style.backgroundColor = "#16b2eb7d";
     sin.innerHTML = "<p>sinh</p>";
@@ -232,18 +183,11 @@ sin.addEventListener("click", (e) => {
   if (!sin_event) {
     sin_event = true;
     lastOperation = e.target.innerText;
-
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
 
     display1El.innerText = e.target.innerText + dis2Num;
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
-    // console.log("after"+ display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 cos.addEventListener("click", (e) => {
@@ -251,18 +195,11 @@ cos.addEventListener("click", (e) => {
   if (!cos_event) {
     cos_event = true;
     lastOperation = e.target.innerText;
-
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
 
     display1El.innerText = e.target.innerText + dis2Num;
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
-    // console.log("after"+ display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 tan.addEventListener("click", (e) => {
@@ -270,18 +207,11 @@ tan.addEventListener("click", (e) => {
   if (!tan_event) {
     tan_event = true;
     lastOperation = e.target.innerText;
-
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
 
     display1El.innerText = e.target.innerText + dis2Num;
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
-    // console.log("after"+ display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 
@@ -290,61 +220,35 @@ csc.addEventListener("click", (e) => {
   if (!csc_event) {
     csc_event = true;
     lastOperation = e.target.innerText;
-
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
-
     display1El.innerText = e.target.innerText + dis2Num;
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
-    // console.log("after"+ display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 sec.addEventListener("click", (e) => {
-  console.log(e.target.innerText);
   if (!sec_event) {
     sec_event = true;
     lastOperation = e.target.innerText;
-
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
 
     display1El.innerText = e.target.innerText + dis2Num;
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
-    // console.log("after"+ display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 cot.addEventListener("click", (e) => {
-  console.log(e.target.innerText);
   if (!cot_event) {
     cot_event = true;
     lastOperation = e.target.innerText;
-
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
-
     display1El.innerText = e.target.innerText + dis2Num;
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
-    // console.log("after"+ display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 
 trigonometry.addEventListener("click", (e) => {
-  // console.log( document.getElementsByClassName("block")[0].style);
   if (trigonometry_event) {
     document.getElementsByClassName("block")[0].style.display = "none";
   } else {
@@ -353,7 +257,6 @@ trigonometry.addEventListener("click", (e) => {
   trigonometry_event = !trigonometry_event;
 });
 fn.addEventListener("click", (e) => {
-  // console.log( document.getElementsByClassName("block")[0].style);
   if (block2_event) {
     document.getElementsByClassName("block2")[0].style.display = "none";
   } else {
@@ -366,35 +269,23 @@ one_divide.addEventListener("click", (e) => {
   if (!one_divide_event) {
     one_divide_event = true;
     lastOperation = e.target.innerText;
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
-
     display1El.innerText = "1" + "/" + dis2Num;
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
     console.log("after" + display2El.innerText);
     dis2Num = result;
   }
-  //
 });
 
 fact.addEventListener("click", (e) => {
   if (!fact_event) {
     fact_event = true;
     lastOperation = e.target.innerText;
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
-
     display1El.innerText = dis2Num + "" + "!";
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
     console.log("after" + display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 
@@ -402,17 +293,11 @@ square.addEventListener("click", (e) => {
   if (!square_event) {
     two_rest_event = true;
     lastOperation = e.target.innerText;
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
-
     display1El.innerText = dis2Num + "" + lastOperation;
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
     console.log("after" + display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 
@@ -420,17 +305,11 @@ sqrt.addEventListener("click", (e) => {
   if (!sqrt_event) {
     sqrt_event = true;
     lastOperation = e.target.innerText;
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
-
     display1El.innerText = lastOperation + dis2Num + "";
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
     console.log("after" + display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 
@@ -438,17 +317,11 @@ base10.addEventListener("click", (e) => {
   if (!b_ten) {
     b_ten = true;
     lastOperation = e.target.innerText;
-    // console.log(lastOperation);
-    // const operationName = e.target.innerText;
     mathOperation();
-
     display1El.innerText = lastOperation + dis2Num + "";
-    // console.log("res"+result);
-    // console.log(display2El.innerText);
     display2El.innerText = result;
     console.log("after" + display2El.innerText);
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 
@@ -456,14 +329,12 @@ log10.addEventListener("click", (e) => {
   if (!log) {
     log = true;
     lastOperation = e.target.innerText;
-    // console.log(lastOperation);
     const operationName = e.target.innerText;
     mathOperation();
     console.log(result);
     display1El.innerText = dis2Num + "" + lastOperation;
     display2El.innerText = result;
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
 
@@ -476,12 +347,8 @@ ln.addEventListener("click", (e) => {
     display1El.innerText = dis2Num + "" + lastOperation;
     display2El.innerText = result;
     dis2Num = result;
-    // clearVar(operationName);
   }
 });
-
-// console.log(operationEl);
-
 numbersEl.forEach((number) => {
   number.addEventListener("click", (e) => {
     if (e.target.innerText === "." && !haveDot) {
@@ -496,32 +363,12 @@ numbersEl.forEach((number) => {
 
 operationEl.forEach((operation) => {
   operation.addEventListener("click", (e) => {
-    // if (!dis2Num) return;
     haveDot = false;
-    const operationName = e.target.innerText;
-    // console.log(dis1Num,dis2Num,lastOperation);
     dis2Num += e.target.innerText;
     display2El.innerText = dis2Num;
-
-    // if (dis1Num && dis2Num && lastOperation) {
-    //   mathOperation();
-    // } else {
-    //   result = parseFloat(dis2Num);
-    // }
-    // clearVar(operationName);
-    // lastOperation = operationName;
-    // console.log(result);
   });
 });
 const clearVar = (name = "") => {
-  // console.log("disp1"+display1El);
-  // console.log("disp2"+display2El);
-  // console.log("dis1"+dis1Num);
-  // console.log("dis2"+dis2Num);
-  // console.log("result"+result);
-  // console.log("tempres"+tempResultEl);
-  // console.log("name"+name);
-  // console.log(name);
   dis1Num += dis2Num + " " + name + " ";
   display1El.innerText = dis1Num;
   display2El.innerText = "";
@@ -690,18 +537,13 @@ const factorial = (num) => {
 };
 
 equalEl.addEventListener("click", () => {
-  // if (!dis2Num || !dis1Num) return;
   haveDot = false;
-  // mathOperation();
-  // clearVar();
   console.log(dis2Num);
   display1El.innerText = dis2Num;
   result = eval(dis2Num);
   display2El.innerText = result;
-  // tempResultEl.innerText = "";
   dis2Num = result;
   dis1Num = "";
-  // console.log("after" + result);
 });
 
 clearAllEl.addEventListener("click", () => {
@@ -740,12 +582,10 @@ window.addEventListener("keydown", (e) => {
     e.key === "."
   ) {
     clickButtonEl(e.key);
-    // console.log(e.key)
   } else if (e.key === "+" || e.key === "-" || e.key === "/" || e.key === "%") {
     clickOperation(e.key);
   } else if (e.key === "*") {
     clickOperation("x");
-    // console.log(e.key)
   } else if (e.key == "Enter" || e.key === "=") {
     clickEqual();
   } else if (e.key == "Backspace") {
@@ -753,7 +593,6 @@ window.addEventListener("keydown", (e) => {
   } else if (e.key == "Delete") {
     allremove();
   }
-  // console.log(e.key)
 });
 const clickButtonEl = (key) => {
   numbersEl.forEach((button) => {
