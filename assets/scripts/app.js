@@ -18,6 +18,11 @@ const fact = document.getElementById("fact");
 const one_divide = document.getElementById("one_divide");
 const trigonometry = document.getElementById("trigonometry");
 const fn = document.getElementById("function");
+const m_plus=document.getElementById('m_plus')
+const m_minus=document.getElementById('m_minus')
+const m_clear=document.getElementById('m_clear')
+const m_save=document.getElementById('m_save')
+const m_recall=document.getElementById('m_recall')
 const block = trigonometry.getElementsByClassName("block");
 const block2 = trigonometry.getElementsByClassName("block2");
 const trichange = document.getElementById("trichange");
@@ -35,6 +40,8 @@ const tan = document.getElementById("tan");
 const csc = document.getElementById("csc");
 const sec = document.getElementById("sec");
 const cot = document.getElementById("cot");
+const change=document.getElementById('change')
+let mresult=0;
 
 let blockevent = false;
 let block2_event = false;
@@ -59,9 +66,53 @@ let csc_event = false;
 let sec_event = false;
 let cot_event = false;
 let trihyp_event = false;
+let change_event=false;
 let mode_event = false;
 let floor_event = false;
 let ceil_event = false;
+
+
+change.addEventListener('click',(e)=>{
+  if(!change_event){
+    square.innerText='x3';
+    sqrt.innerText='c_root';
+    power.innerText='x_root';
+    base10.innerText='2^x';
+    log.innerText='logyx';
+    ln.innerText='e^x';
+  }
+  else{
+    square.innerText='x2';
+    sqrt.innerText='sqrt';
+    power.innerText='xy';
+    base10.innerText='10x';
+    log.innerText='log';
+    ln.innerText='ln';
+  }
+  change_event=!change_event;
+
+
+
+})
+
+m_save.addEventListener('click',(e)=>{
+    mresult=parseFloat(dis2Num); 
+    console.log(mresult);
+})
+m_plus.addEventListener('click',(e)=>{
+    mresult+=parseFloat(dis2Num);
+})
+m_minus.addEventListener('click',(e)=>{
+  mresult-=parseFloat(dis2Num);
+})
+m_recall.addEventListener('click',(e)=>{
+  display2El.innerText=mresult;
+})
+m_clear.addEventListener('click',(e)=>{
+  mresult=0;
+  display2El.innerText=mresult;
+})
+
 
 exp.addEventListener("click", () => {
   result = Math.exp(dis2Num);
@@ -137,7 +188,7 @@ pie.addEventListener("click", (e) => {
 });
 
 trichange.addEventListener("click", (e) => {
-  e.stopPropagation();
+  // e.stopPropagation();
   if (!trichange_event) {
     trichange.style.backgroundColor = "#16b2eb7d";
     sin.innerHTML = "<p>sin <sup>-1</sup></p>";
@@ -381,19 +432,38 @@ const mathOperation = () => {
     // if (!dis2Num) return;
     console.log("disp2" + dis2Num);
     result = Math.log10(dis2Num);
-  } else if (lastOperation === "ln") {
-    console.log(dis2Num);
+  } else if (lastOperation === "ln" || lastOperation==='e^x') {
     if (!dis2Num) return;
-    result = Math.log(dis2Num);
-  } else if (lastOperation === "10x") {
+    if(lastOperation=='ln'){
+      result = Math.log(dis2Num);
+    }else{
+      result = Math.exp(dis2Num);
+    }
+   
+  } else if (lastOperation === "10x" || lastOperation === "2^x") {
     if (!dis2Num) return;
-    result = Math.pow(10, parseFloat(dis2Num));
+    if(lastOperation==='10x'){
+      result = Math.pow(10, parseFloat(dis2Num));
+    }else{
+      result = Math.pow(2, parseFloat(dis2Num));
+    }
+    
   } else if (lastOperation === "xy") {
     result = Math.pow(parseFloat(dis1Num), parseFloat(dis2Num));
-  } else if (lastOperation === "sqrt") {
-    result = Math.sqrt(dis2Num);
-  } else if (lastOperation === "x2") {
-    result = Math.pow(parseFloat(dis2Num), 2);
+  } else if (lastOperation === "sqrt" || lastOperation === "c_root") {
+    if(lastOperation==='sqrt'){
+      result = Math.sqrt(dis2Num);
+    }else{
+      result = Math.cbrt(dis2Num);
+    }
+    
+  } else if (lastOperation === "x2" || lastOperation ==='x3') {
+    if(lastOperation==='x2'){
+      result = Math.pow(parseFloat(dis2Num), 2);
+    }else{
+      result = Math.pow(parseFloat(dis2Num), 3);
+    }
+    
   } else if (lastOperation === "n!") {
     result = factorial(parseFloat(dis2Num));
   } else if (lastOperation === "1/x") {
@@ -528,7 +598,7 @@ const mathOperation = () => {
     }
     result = "" + d + ":" + m + ":" + s;
     //  return ("" + d + ":" + m + ":" + s);
-  }
+  } 
 };
 
 const factorial = (num) => {
