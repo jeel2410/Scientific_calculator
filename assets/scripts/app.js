@@ -41,6 +41,7 @@ const csc = document.getElementById("csc");
 const sec = document.getElementById("sec");
 const cot = document.getElementById("cot");
 const change=document.getElementById('change')
+const fe=document.getElementById('F-E')
 let mresult=0;
 
 let blockevent = false;
@@ -72,20 +73,26 @@ let floor_event = false;
 let ceil_event = false;
 
 
+fe.addEventListener('click',(e)=>{
+  display2El.innerText=dis2Num+"e+ 0";
+  display1El.innerText="";
+
+})
+
 change.addEventListener('click',(e)=>{
   if(!change_event){
-    square.innerText='x3';
-    sqrt.innerText='c_root';
-    power.innerText='x_root';
-    base10.innerText='2^x';
+    square.innerHTML='<p>x<sup>3</sup>';
+    sqrt.innerHTML='<p><sup>3</sup>√x</p>';
+    power.innerHTML='<p><sup>y</sup>√x</p>';
+    base10.innerHTML='<p>2<sup>x</sup></p>';
     log.innerText='logyx';
     ln.innerText='e^x';
   }
   else{
-    square.innerText='x2';
-    sqrt.innerText='sqrt';
-    power.innerText='xy';
-    base10.innerText='10x';
+    square.innerHTML='<p>x<sup>2</sup>';
+    sqrt.innerHTML='<p><sup>2</sup>√x</p>';
+    power.innerHTML='<p>x<sup>y</sup></p>';
+    base10.innerHTML='<p>10<sup>x</sup></p>';
     log.innerText='log';
     ln.innerText='ln';
   }
@@ -345,7 +352,13 @@ square.addEventListener("click", (e) => {
     two_rest_event = true;
     lastOperation = e.target.innerText;
     mathOperation();
-    display1El.innerText = dis2Num + "" + lastOperation;
+    console.log(lastOperation);
+    if(lastOperation==='x2'){
+      display1El.innerHTML =`<p>${dis2Num}<sup>2</sup></p>`
+    }else{
+      display1El.innerHTML =`<p>${dis2Num}<sup>3</sup></p>`
+    }
+  
     display2El.innerText = result;
     console.log("after" + display2El.innerText);
     dis2Num = result;
@@ -353,13 +366,19 @@ square.addEventListener("click", (e) => {
 });
 
 sqrt.addEventListener("click", (e) => {
+  console.log(e.target.innerText);
   if (!sqrt_event) {
     sqrt_event = true;
     lastOperation = e.target.innerText;
     mathOperation();
-    display1El.innerText = lastOperation + dis2Num + "";
+    if(lastOperation==='2√x'){
+      display1El.innerHTML = `<p><sup>2</sup>√${dis2Num}</p>`
+    }else{
+      display1El.innerHTML = `<p><sup>3</sup>√${dis2Num}</p>`
+    }
+    
     display2El.innerText = result;
-    console.log("after" + display2El.innerText);
+    // console.log("after" + display2El.innerText);
     dis2Num = result;
   }
 });
@@ -368,8 +387,10 @@ base10.addEventListener("click", (e) => {
   if (!b_ten) {
     b_ten = true;
     lastOperation = e.target.innerText;
+    console.log("e value "+e.target.innerText);
     mathOperation();
     display1El.innerText = lastOperation + dis2Num + "";
+    console.log(result);
     display2El.innerText = result;
     console.log("after" + display2El.innerText);
     dis2Num = result;
@@ -440,7 +461,8 @@ const mathOperation = () => {
       result = Math.exp(dis2Num);
     }
    
-  } else if (lastOperation === "10x" || lastOperation === "2^x") {
+  } else if (lastOperation === "10x" || lastOperation === "2x") {
+    console.log("lastopearation in res"+lastOperation);
     if (!dis2Num) return;
     if(lastOperation==='10x'){
       result = Math.pow(10, parseFloat(dis2Num));
@@ -450,8 +472,8 @@ const mathOperation = () => {
     
   } else if (lastOperation === "xy") {
     result = Math.pow(parseFloat(dis1Num), parseFloat(dis2Num));
-  } else if (lastOperation === "sqrt" || lastOperation === "c_root") {
-    if(lastOperation==='sqrt'){
+  } else if (lastOperation === "2√x" || lastOperation === "3√x") {
+    if(lastOperation==='2√x'){
       result = Math.sqrt(dis2Num);
     }else{
       result = Math.cbrt(dis2Num);
