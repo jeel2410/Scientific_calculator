@@ -517,7 +517,7 @@ const mathOperation = () => {
       result = Math.sin(dis2Num);
     }
     if(degree_event){
-      result=dis2Num*(Math.PI/180.0).toFixed(2)
+      result=dis2Num*(Math.PI/180.0)
     }
     // console.log("res"+result);
     sin_event = false;
