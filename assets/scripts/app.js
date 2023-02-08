@@ -42,6 +42,7 @@ const sec = document.getElementById("sec");
 const cot = document.getElementById("cot");
 const change=document.getElementById('change')
 const fe=document.getElementById('F-E')
+const degree=document.getElementById('degree')
 let mresult=0;
 
 let blockevent = false;
@@ -71,6 +72,17 @@ let change_event=false;
 let mode_event = false;
 let floor_event = false;
 let ceil_event = false;
+let degree_event=true;
+
+
+degree.addEventListener('click',()=>{
+  if(degree_event){
+    degree.innerText='RAD'
+  }else{
+    degree.innerText='DEG'
+  }
+  degree_event=!degree_event
+})
 
 
 fe.addEventListener('click',(e)=>{
@@ -503,6 +515,9 @@ const mathOperation = () => {
       result = Math.sinh(dis2Num);
     } else {
       result = Math.sin(dis2Num);
+    }
+    if(degree_event){
+      result=dis2Num*(Math.PI/180.0).toFixed(2)
     }
     // console.log("res"+result);
     sin_event = false;
