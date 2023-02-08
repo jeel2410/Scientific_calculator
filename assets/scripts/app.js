@@ -11,18 +11,18 @@ const ln = document.getElementById("ln");
 const base10 = document.getElementById("base10");
 const pie = document.getElementById("pie");
 const e = document.getElementById("e");
-// const power = document.getElementById("power");
+const power = document.getElementById("power");
 const sqrt = document.getElementById("sqrt");
 const square = document.getElementById("square");
 const fact = document.getElementById("fact");
 const one_divide = document.getElementById("one_divide");
 const trigonometry = document.getElementById("trigonometry");
 const fn = document.getElementById("function");
-const m_plus=document.getElementById('m_plus')
-const m_minus=document.getElementById('m_minus')
-const m_clear=document.getElementById('m_clear')
-const m_save=document.getElementById('m_save')
-const m_recall=document.getElementById('m_recall')
+const m_plus = document.getElementById('m_plus')
+const m_minus = document.getElementById('m_minus')
+const m_clear = document.getElementById('m_clear')
+const m_save = document.getElementById('m_save')
+const m_recall = document.getElementById('m_recall')
 const block = trigonometry.getElementsByClassName("block");
 const block2 = trigonometry.getElementsByClassName("block2");
 const trichange = document.getElementById("trichange");
@@ -40,10 +40,16 @@ const tan = document.getElementById("tan");
 const csc = document.getElementById("csc");
 const sec = document.getElementById("sec");
 const cot = document.getElementById("cot");
-const change=document.getElementById('change')
-const fe=document.getElementById('F-E')
-const degree=document.getElementById('degree')
-let mresult=0;
+const change = document.getElementById('change')
+const fe = document.getElementById('F-E')
+const plus_minus = document.getElementById('plus_minus')
+const degree = document.getElementById('degree');
+let mresult = 0;
+// let degree_event=true;
+
+
+
+
 
 let blockevent = false;
 let block2_event = false;
@@ -68,12 +74,12 @@ let csc_event = false;
 let sec_event = false;
 let cot_event = false;
 let trihyp_event = false;
-let change_event=false;
+let change_event = false;
 let mode_event = false;
 let floor_event = false;
 let ceil_event = false;
-let degree_event=true;
-
+let power_event = false;
+let degree_event = true;
 
 degree.addEventListener('click',()=>{
   if(degree_event){
@@ -84,52 +90,67 @@ degree.addEventListener('click',()=>{
   degree_event=!degree_event
 })
 
-
-fe.addEventListener('click',(e)=>{
-  display2El.innerText=dis2Num+"e+ 0";
-  display1El.innerText="";
-
+power.addEventListener('click', (e) => {
+  // console.log(dis2Num);
+  dis1Num = dis2Num;
+  dis2Num = "";
+  power_event = true;
+  lastOperation = e.target.innerText;
 })
 
-change.addEventListener('click',(e)=>{
-  if(!change_event){
-    square.innerHTML='<p>x<sup>3</sup>';
-    sqrt.innerHTML='<p><sup>3</sup>√x</p>';
-    power.innerHTML='<p><sup>y</sup>√x</p>';
-    base10.innerHTML='<p>2<sup>x</sup></p>';
-    log.innerText='logyx';
-    ln.innerText='e^x';
+plus_minus.addEventListener('click', (e) => {
+  if (isNaN(parseFloat(dis2Num))) {
+    return;
   }
-  else{
-    square.innerHTML='<p>x<sup>2</sup>';
-    sqrt.innerHTML='<p><sup>2</sup>√x</p>';
-    power.innerHTML='<p>x<sup>y</sup></p>';
-    base10.innerHTML='<p>10<sup>x</sup></p>';
-    log.innerText='log';
-    ln.innerText='ln';
+  dis2Num = parseFloat(dis2Num) * (-1)
+  display2El.innerText = dis2Num;
+})
+
+fe.addEventListener('click', (e) => {
+  display2El.innerText = dis2Num + "e+ 0";
+  display1El.innerText = "";
+
+})
+
+change.addEventListener('click', (e) => {
+  if (!change_event) {
+    // change[0].style.backgroundColor='white'
+    square.innerHTML = '<p>x<sup>3</sup>';
+    sqrt.innerHTML = '<p><sup>3</sup>√x</p>';
+    power.innerHTML = '<p><sup>y</sup>√x</p>';
+    base10.innerHTML = '<p>2<sup>x</sup></p>';
+    log.innerText = 'logyx';
+    // ln.innerHTML='<p>e<sup>x</sup></p>';
+    ln.innerText = 'e^x'
   }
-  change_event=!change_event;
-
-
-
+  else {
+    // change[0].style.backgroundColor ='#16b2eb7d'
+    square.innerHTML = '<p>x<sup>2</sup>';
+    sqrt.innerHTML = '<p><sup>2</sup>√x</p>';
+    power.innerHTML = '<p>x<sup>y</sup></p>';
+    base10.innerHTML = '<p>10<sup>x</sup></p>';
+    log.innerText = 'log';
+    ln.innerText = 'ln';
+  }
+  change_event = !change_event;
 })
 
-m_save.addEventListener('click',(e)=>{
-    mresult=parseFloat(dis2Num); 
-    console.log(mresult);
+m_save.addEventListener('click', (e) => {
+  mresult = parseFloat(dis2Num);
+  console.log(mresult);
 })
-m_plus.addEventListener('click',(e)=>{
-    mresult+=parseFloat(dis2Num);
+m_plus.addEventListener('click', (e) => {
+  mresult += parseFloat(dis2Num);
 })
-m_minus.addEventListener('click',(e)=>{
-  mresult-=parseFloat(dis2Num);
+m_minus.addEventListener('click', (e) => {
+  mresult -= parseFloat(dis2Num);
 })
-m_recall.addEventListener('click',(e)=>{
-  display2El.innerText=mresult;
+m_recall.addEventListener('click', (e) => {
+  display2El.innerText = mresult;
 })
-m_clear.addEventListener('click',(e)=>{
-  mresult=0;
-  display2El.innerText=mresult;
+m_clear.addEventListener('click', (e) => {
+  mresult = 0;
+  display2El.innerText = mresult;
 })
 
 
@@ -365,12 +386,12 @@ square.addEventListener("click", (e) => {
     lastOperation = e.target.innerText;
     mathOperation();
     console.log(lastOperation);
-    if(lastOperation==='x2'){
-      display1El.innerHTML =`<p>${dis2Num}<sup>2</sup></p>`
-    }else{
-      display1El.innerHTML =`<p>${dis2Num}<sup>3</sup></p>`
+    if (lastOperation === 'x2') {
+      display1El.innerHTML = `<p>${dis2Num}<sup>2</sup></p>`
+    } else {
+      display1El.innerHTML = `<p>${dis2Num}<sup>3</sup></p>`
     }
-  
+
     display2El.innerText = result;
     console.log("after" + display2El.innerText);
     dis2Num = result;
@@ -383,12 +404,12 @@ sqrt.addEventListener("click", (e) => {
     sqrt_event = true;
     lastOperation = e.target.innerText;
     mathOperation();
-    if(lastOperation==='2√x'){
+    if (lastOperation === '2√x') {
       display1El.innerHTML = `<p><sup>2</sup>√${dis2Num}</p>`
-    }else{
+    } else {
       display1El.innerHTML = `<p><sup>3</sup>√${dis2Num}</p>`
     }
-    
+
     display2El.innerText = result;
     // console.log("after" + display2El.innerText);
     dis2Num = result;
@@ -399,7 +420,7 @@ base10.addEventListener("click", (e) => {
   if (!b_ten) {
     b_ten = true;
     lastOperation = e.target.innerText;
-    console.log("e value "+e.target.innerText);
+    console.log("e value " + e.target.innerText);
     mathOperation();
     display1El.innerText = lastOperation + dis2Num + "";
     console.log(result);
@@ -428,7 +449,11 @@ ln.addEventListener("click", (e) => {
     lastOperation = e.target.innerText;
     mathOperation();
     console.log(result);
-    display1El.innerText = dis2Num + "" + lastOperation;
+    if (lastOperation === 'ln') {
+      display1El.innerText = dis2Num + "" + lastOperation;
+    } else {
+      display1El.innerText = "e^" + dis2Num;
+    }
     display2El.innerText = result;
     dis2Num = result;
   }
@@ -465,39 +490,41 @@ const mathOperation = () => {
     // if (!dis2Num) return;
     console.log("disp2" + dis2Num);
     result = Math.log10(dis2Num);
-  } else if (lastOperation === "ln" || lastOperation==='e^x') {
+  } else if (lastOperation === "ln" || lastOperation === 'e^x') {
+    // console.log('last operation'+lastOperation)
     if (!dis2Num) return;
-    if(lastOperation=='ln'){
+    if (lastOperation === 'ln') {
       result = Math.log(dis2Num);
-    }else{
+
+    } else {
       result = Math.exp(dis2Num);
     }
-   
+
   } else if (lastOperation === "10x" || lastOperation === "2x") {
-    console.log("lastopearation in res"+lastOperation);
+    console.log("lastopearation in res" + lastOperation);
     if (!dis2Num) return;
-    if(lastOperation==='10x'){
+    if (lastOperation === '10x') {
       result = Math.pow(10, parseFloat(dis2Num));
-    }else{
+    } else {
       result = Math.pow(2, parseFloat(dis2Num));
     }
-    
+
   } else if (lastOperation === "xy") {
     result = Math.pow(parseFloat(dis1Num), parseFloat(dis2Num));
   } else if (lastOperation === "2√x" || lastOperation === "3√x") {
-    if(lastOperation==='2√x'){
+    if (lastOperation === '2√x') {
       result = Math.sqrt(dis2Num);
-    }else{
+    } else {
       result = Math.cbrt(dis2Num);
     }
-    
-  } else if (lastOperation === "x2" || lastOperation ==='x3') {
-    if(lastOperation==='x2'){
+
+  } else if (lastOperation === "x2" || lastOperation === 'x3') {
+    if (lastOperation === 'x2') {
       result = Math.pow(parseFloat(dis2Num), 2);
-    }else{
+    } else {
       result = Math.pow(parseFloat(dis2Num), 3);
     }
-    
+
   } else if (lastOperation === "n!") {
     result = factorial(parseFloat(dis2Num));
   } else if (lastOperation === "1/x") {
@@ -535,6 +562,9 @@ const mathOperation = () => {
     } else {
       result = Math.cos(dis2Num);
     }
+    if(degree_event){
+      result=dis2Num*(Math.PI/180.0)
+    }
     // console.log("res"+result);
     cos_event = false;
   } else if (
@@ -549,6 +579,9 @@ const mathOperation = () => {
       result = Math.tanh(dis2Num);
     } else {
       result = Math.tan(dis2Num);
+    }
+    if(degree_event){
+      result=dis2Num*(Math.PI/180.0)
     }
     // console.log("res"+result);
     tan_event = false;
@@ -566,6 +599,9 @@ const mathOperation = () => {
     } else {
       result = 1 / Math.sin(dis2Num);
     }
+    if(degree_event){
+      result=dis2Num*(Math.PI/180.0)
+    }
     // console.log("res"+result);
     csc_event = false;
   } else if (
@@ -582,6 +618,9 @@ const mathOperation = () => {
     } else {
       result = 1 / Math.cos(dis2Num);
     }
+    if(degree_event){
+      result=dis2Num*(Math.PI/180.0)
+    }
     // console.log("res"+result);
     sec_event = false;
   } else if (
@@ -597,8 +636,11 @@ const mathOperation = () => {
     } else {
       result = 1 / Math.tan(dis2Num);
     }
+    if(degree_event){
+      result=dis2Num*(Math.PI/180.0)
+    }
     // console.log("res"+result);
-    tan_event = false;
+    cot_event = false;
   } else if (lastOperation === "pie") {
     console.log("dis2" + dis2Num);
     if (dis2Num) {
@@ -635,7 +677,7 @@ const mathOperation = () => {
     }
     result = "" + d + ":" + m + ":" + s;
     //  return ("" + d + ":" + m + ":" + s);
-  } 
+  }
 };
 
 const factorial = (num) => {
@@ -645,7 +687,24 @@ const factorial = (num) => {
 
 equalEl.addEventListener("click", () => {
   haveDot = false;
-  console.log(dis2Num);
+  if (power_event) {
+    if (lastOperation === 'xy') {
+      result = Math.pow(dis1Num, dis2Num);
+      console.log("res" + result)
+      display2El.innerText = result;
+      display1El.innerHTML = `<p>${dis1Num}<sup>${dis2Num}</sup></p>`
+      power_event = false;
+      return;
+    } else {
+      result = Math.exp(1 / dis2Num * Math.log(dis1Num));
+      console.log("res" + result)
+      display2El.innerText = result;
+      display1El.innerHTML = `<p><sup>${dis2Num}</sup>√${dis1Num}</p>`
+      power_event = false;
+      return;
+    }
+
+  }
   display1El.innerText = dis2Num;
   result = eval(dis2Num);
   display2El.innerText = result;
